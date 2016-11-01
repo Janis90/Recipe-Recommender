@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= @event.title %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <h5 class="text-center">Information:</h5>
+      <p class="text-center">
+      <%= @event.date.strftime("%d.%m.%Y") %>
+      </p>
+      <p class="text-center">
+      <%= @event.start_time.strftime("%H:%M") %> - <%= @event.end_time.strftime("%H:%M") %>
+      </p>
+      <p class="text-center">
+      <%= User.where(id: @event.creator_id).first.username %>
+      </p>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <p><%= @event.description %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2 class="text-center"><%= t('events.participants') %></h2>
+  </div>
+  <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="text-center"><%= t('user.username') %></th>
+          <th class="text-center"><%= t('user.first_name') %></th>
+          <th class="text-center"><%= t('user.last_name') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.users.each do |user| %>
+          <tr>
+            <td class="text-center"><%= user.username %></td>
+            <td class="text-center"><%= user.first_name%></td>
+            <td class="text-center"><%= user.last_name%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

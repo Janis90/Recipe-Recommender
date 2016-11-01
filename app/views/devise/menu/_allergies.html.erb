@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <!-- TODO: if user == admin-->
+  <li class="<%= is_active?(allergies_path)%>">
+    <%= link_to( t('header.allergies'), allergies_path) %>
+  </li>
+<% end %>

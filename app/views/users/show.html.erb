@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= @user.username.capitalize %>'s user information</h1>
+    </div>
+  </div>
+
+  <h3 class="text-center"> <%= @user.username.capitalize %>'s personal information </h3>
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+      <%= render 'show_user' %>
+    </div>
+  </div>
+  <div class="row">
+    <h3 class="text-center"> <%= @user.username.capitalize %>'s food restrictions </h3>
+    <!-- Display user's restriction -->
+  </div>
+  <div class="row">
+    <h3 class="text-center"> <%= @user.username.capitalize %>'s food allergies </h3>
+    <!-- Display user's allergies -->
+    <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+      <ul class="list-group">
+        <% @user.allergies.each do |allergy| %>
+          <li class="list-group-item"><%= allergy.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <h3 class="text-center"> <%= @user.username.capitalize %>'s food rating</h3>
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <!-- Display user's food rating results-->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center"><%= t('ingredients.ingredient') %></th>
+            <th class="text-center"><%= t('misc.liking') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.ingredients.each do |ingredient| %>
+            <tr>
+              <td class="text-center"><%= ingredient.name %></td>
+              <td class="text-center"><%= @priorities[UserIngredient.where("user_id = ? AND ingredient_id = ?", @user.id, ingredient.id).first.rating] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

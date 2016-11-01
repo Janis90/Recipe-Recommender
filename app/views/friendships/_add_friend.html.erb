@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+
+      <%= form_for :user, url: {controller: 'friendships', action: 'create', method: 'post' }, html: { role: 'form' } do |f| %>
+        <div class="input-group">
+          <%= f.text_field :username, class: 'form-control', placeholder: 'Add a friend by username' %>
+          <span class="input-group-btn">
+            <%= f.submit 'Go!', class: 'btn btn-default' %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

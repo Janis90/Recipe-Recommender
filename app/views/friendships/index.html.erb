@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= t('friendships.headers.my_friends') %></h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <%= render 'table_header' %>
+        <th class="col-md-1"><%= t('user.unfriend') %></th>
+        <th class="col-md-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @friends.each do |friend| %>
+        <tr>
+          <td><%= friend.username %></td>
+          <td><%= friend.first_name %></td>
+          <td><%= friend.last_name %></td>
+          <td><%= render_friend_into_button(friend) %></td>
+          <td><%= render_unfriend_button(friend) %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render 'add_friend' %>
+
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= t('friendships.headers.pending_friends') %></h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <%= render 'table_header' %>
+        <th class="col-md-1"><%= t('user.accept') %></th>
+        <th class="col-md-1"><%= t('user.decline') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.pending_friends.each do |friend| %>
+        <tr>
+          <td><%= friend.username %></td>
+          <td><%= friend.first_name %></td>
+          <td><%= friend.last_name %></td>
+          <td><%= render_friend_into_button(friend) %></td>
+          <td><%= render_friend_accept_button(friend) %></td>
+          <td><%= render_friend_decline_button(friend) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= t('friendships.headers.my_requests') %></h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <%= render 'table_header' %>
+        <th class="col-md-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.requested_friends.each do |friend| %>
+        <tr>
+          <td><%= friend.username %></td>
+          <td><%= friend.first_name %></td>
+          <td><%= friend.last_name %></td>
+          <td><%= render_friend_into_button(friend) %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

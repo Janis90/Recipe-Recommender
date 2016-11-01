@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <!-- TODO: if user == admin-->
+  <li class="<%= is_active?(ingredients_path)%>">
+    <%= link_to( t('header.ingredients'), ingredients_path) %>
+  </li>
+<% end %>

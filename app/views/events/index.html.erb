@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= t('events.my_events') %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center"><%= t('events.title') %></th>
+            <th class="text-center"><%= t('events.date') %></th>
+            <th class="text-center"><%= t('user.info') %></th>
+            <th class="text-center"><%= t('forms.buttons.edit') %></th>
+            <th class="text-center"><%= t('forms.buttons.destroy') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @my_events.each do |my_event| %>
+            <tr>
+              <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center"><%= my_event.title %></td>
+              <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"><%= my_event.date %></td>
+              <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_info_button(my_event) %></td>
+              <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_edit_button(my_event) %></td>
+              <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_destroy_button(my_event) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="text-center"><%= t('events.add') %></p>
+    <div class="text-center">
+      <%= link_to t('forms.buttons.new'), new_event_path, class: 'btn btn-success' %>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= t('events.invitations') %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center"><%= t('events.title') %></th>
+            <th class="text-center"><%= t('events.date') %></th>
+            <th class="text-center"><%= t('user.info') %></th>
+            <th class="text-center"><%= t('forms.button.reject') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invitations.each do |invitation| %>
+            <tr>
+              <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center"><%= invitation.title %></td>
+              <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center"><%= invitation.date %></td>
+              <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_info_button(invitation) %></td>
+              <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><%= render_not_participate_button(invitation) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

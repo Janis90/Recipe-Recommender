@@ -1,0 +1,25 @@
+// Place all the styles related to the Ingredients controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*_______________ Circles for wheather ingredients is a food cathegory _______________*/
+.circle-green {
+    background-color:#9acd32;
+    height:12px;
+    width:120x;
+    -webkit-border-radius:75px;
+    -moz-border-radius:75px;
+}
+
+.circle-red {
+    background-color:#dc143c;
+    height:12px;
+    width:12px;
+    -webkit-border-radius:75px;
+    -moz-border-radius:75px;
+}
+
+/*_______________ Centers text in table _______________*/
+//.align-center {
+   //text-align: center;
+//}
