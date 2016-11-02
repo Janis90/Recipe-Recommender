@@ -21,7 +21,7 @@
           <% @my_events.each do |my_event| %>
             <tr>
               <td class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center"><%= my_event.title %></td>
-              <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"><%= my_event.date %></td>
+              <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"><%= my_event.date.strftime("%d.%m.%Y") %></td>
               <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_info_button(my_event) %></td>
               <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_edit_button(my_event) %></td>
               <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center"><%= render_event_destroy_button(my_event) %></td>
