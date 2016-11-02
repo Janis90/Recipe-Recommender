@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.date = transform_date_type(params[:event][:date])
+    @event.date = Date.parse(params[:event][:date])
     @event.creator_id = current_user.id
     @event.users = get_invited_friends_from_params
     respond_to do |format|
@@ -51,7 +51,6 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1.json
   def update
     @event.creator_id = current_user.id
-    @event.date = transform_date_type(params[:event][:date])
     @event.users = get_invited_friends_from_params
     respond_to do |format|
       if @event.update(event_params)
@@ -75,7 +74,6 @@ class EventsController < ApplicationController
   end
 
   def decline_event
-    debugger
     user_event = UserEvent.where("event_id = ? and user_id = ?", @event.id, current_user.id).first
 
     if user_event.destroy
@@ -96,7 +94,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :date, :start_time, :end_time, :id => [])
+      params.require(:event).permit(:title, :description, :date, :start_time, :end_time)
     end
 
     def invited_friends_params
@@ -107,13 +105,13 @@ class EventsController < ApplicationController
       User.where(id: invited_friends_params)
     end
 
-    #change date type from mm/dd/yyyy to dd/mm/yyyy
+    #convert date to mm/dd/yyyy
     def transform_date_type(date)
-      new_date = date.clone
-      new_date[0] = date[3]
-      new_date[1] = date[4]
-      new_date[3] = date[0]
-      new_date[4] = date[1]
-      new_date
+      if date.present? &&
+        if date.present?
+          new_date = date.strftime("%m/%d/%Y")
+          new_date
+        end
+      end
     end
 end

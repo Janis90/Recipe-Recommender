@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
   validate :validate_end_time
   validate :validate_date
 
+  after_initialize :set_default_date
+
   #end_time can not be before start time
   def validate_end_time
     if self.end_time.present? && self.end_time < self.start_time
@@ -20,5 +22,9 @@ class Event < ActiveRecord::Base
     if self.date.present? && self.date < Date.today
       errors.add(:date, "can't be in the past")
     end
+  end
+
+  def set_default_date
+    self.date ||= Date.today if new_record?
   end
 end
