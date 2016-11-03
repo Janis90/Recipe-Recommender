@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= t('user.users') %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="text-center"><%= t('user.username') %></th>
+          <th class="text-center"><%= t('user.info') %></th>
+          <th class="text-center"><%= t('user.admin') %></th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td class="col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center"><%= user.username %></td>
+              <td class="col-xs-2 col-sm-2 col-md-1 col-lg-1 text-center"><%= render_user_into_button(user) %></td>
+              <td class="col-xs-2 col-sm-2 col-md-1 col-lg-1 text-center"><%= render_user_admin_button(user) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

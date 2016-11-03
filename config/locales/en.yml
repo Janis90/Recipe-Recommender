@@ -242,8 +242,10 @@ en:
     home: "Home"
     sign_up: "Sign up"
     ingredients: "Ingredients"
+    users: "Users"
   user:
     user: "User"
+    users: "Users"
     username: "Username"
     first_name: "First name"
     last_name: "Last name"
@@ -252,6 +254,10 @@ en:
     decline: "Decline"
     unfriend: "Unfriend"
     email: "E-Mail"
+    status: "Status"
+    admin: "Admin"
+    status_changed: "Admin status changed!"
+    status_not_changed: "Admin status could not be changed!"
   friendships:
     headers:
       my_friends: "My friends"

@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   before_action :set_category_ingredients, only: :edit
   #before_action :set_user_ingredients, only: :edit
   before_action :set_priorities
+  before_filter :must_be_admin, only: :index
+
 
   def show
     @user = User.find(params[:id])
@@ -27,6 +29,27 @@ class UsersController < ApplicationController
     else
 
     redirect_to edit_user_path(@user), alert: t('allergies.update_fail')
+    end
+  end
+
+  def index
+    @users = User.where.not(id: @user.id)
+  end
+
+  def change_admin_status
+    user = User.find(params[:id])
+    if user.admin?
+      if user.update_attribute :admin, false
+        redirect_to users_path, notice: t('user.status_changed')
+      else
+        redirect_to users_path, alert: t('user.status_not_changed')
+      end
+    else
+      if user.update_attribute :admin, true
+        redirect_to users_path, notice: t('user.status_changed')
+      else
+        redirect_to users_path, alert: t('user.status_not_changed')
+      end
     end
   end
 
@@ -75,5 +98,11 @@ class UsersController < ApplicationController
   # PRIORITY = {1 => "Hate", 2 => "Dislike", 3 => "It's okay", 4 => "Like", 5 => "Love" }
   def set_priorities
     @priorities = UserIngredient::PRIORITY
+  end
+
+  def must_be_admin
+    unless current_user && current_user.admin?
+      redirect_to root_path, alert: "You don't have a admin status!"
+    end
   end
 end

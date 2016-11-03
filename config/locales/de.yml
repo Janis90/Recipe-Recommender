@@ -248,8 +248,10 @@ de:
     home: "Startseite"
     sign_up: "Registrierung"
     ingredients: "Zutaten"
+    users: "Benutzer"
   user:
     user: "Benutzer"
+    users: "Benutzer"
     username: "Benutzername"
     first_name: "Vorname"
     last_name: "Nachname"
@@ -258,6 +260,10 @@ de:
     decline: "Ablehnen"
     unfriend: "Entfernen"
     email: "E-Mail"
+    status: "Status"
+    admin: "Administrator"
+    status_changed: "Administratorstatus geändert!"
+    status_not_changed: "Administratorstatus konnte nicht geändert werden!"
   friendships:
     headers:
       my_friends: "Meine Freunde"

@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
  devise_for :users, controllers: { registrations: "registrations" }
 
- resources :users, only: [:show, :edit, :update]
+ resources :users, only: [:index, :show, :edit, :update] do
+   member do
+     post 'change_admin_status/:id' => 'users#change_admin_status', as: 'change_admin_status'
+   end
+ end
  resources :allergies
  resources :ingredients
  resources :events

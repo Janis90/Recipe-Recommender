@@ -1,4 +1,5 @@
 class IngredientsController < ApplicationController
+  before_filter :must_be_admin
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
 
   # GET /ingredients
@@ -72,5 +73,11 @@ class IngredientsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
       params.require(:ingredient).permit(:name, :is_foodcategory)
+    end
+
+    def must_be_admin
+      unless current_user && current_user.admin?
+        redirect_to root_path, alert: "You don't have a admin status!"
+      end
     end
 end

@@ -1,4 +1,5 @@
 class AllergiesController < ApplicationController
+  before_filter :must_be_admin
   before_action :set_allergy, only: [:show, :edit, :update, :destroy]
 
   #TODO insert admin functionality
@@ -73,5 +74,11 @@ class AllergiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def allergy_params
       params.require(:allergy).permit(:name)
+    end
+
+    def must_be_admin
+      unless current_user && current_user.admin?
+        redirect_to root_path, alert: "You don't have a admin status!"
+      end
     end
 end

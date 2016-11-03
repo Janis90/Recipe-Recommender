@@ -77,7 +77,7 @@ class EventsController < ApplicationController
     user_event = UserEvent.where("event_id = ? and user_id = ?", @event.id, current_user.id).first
 
     if user_event.destroy
-      redirect_to events_url, notice: t('event.reject')
+      redirect_to events_url, notice: t('events.reject')
     end
 
   end
