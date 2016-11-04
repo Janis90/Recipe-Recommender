@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+    <li class="<%= is_active?(recipes_path)%>">
+      <%= link_to( t('header.recipes'), recipes_path) %>
+    </li>
+<% end %>

@@ -1,6 +1,8 @@
 class Ingredient < ActiveRecord::Base
   has_many :user_ingredients, dependent: :destroy
   has_many :users, through: :user_ingredients
+  has_many :recipe_ingredient, dependent: :destroy
+  has_many :recipes, through: :recipe_ingredient
 
   validates :name, uniqueness: true
   validates :name, presence: true

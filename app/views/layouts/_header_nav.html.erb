@@ -18,7 +18,7 @@
               <li class="<%= is_active?(root_path) %>"> <%= link_to t('header.home'), root_path %></li>
               <%= render 'devise/menu/friends_item' %>
               <%= render 'devise/menu/events' %>
-              <li> <%= t('header.recipes') %> </li>
+              <%= render 'devise/menu/recipes' %>
               <li><%= t('header.my_recipes') %> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

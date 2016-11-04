@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :recipes
   root 'page#welcome'
 
   resources :friendships, only: [:index, :create, :destroy] do
