@@ -21,12 +21,10 @@ Rails.application.routes.draw do
  resources :allergies
  resources :ingredients
  resources :events
- resources :recipes do
-   member do
-     post 'add_recipe/:id' => 'recipes#add_recipe', as: 'add_recipe'
-   end
- end
+ resources :recipes
+
   get 'my_recipes' => 'recipes#my_recipes', as: 'my_recipes'
+  post 'recipes/add_recipe/:id' => 'recipes#add_recipe', as: 'add_recipe'
 
  delete 'decline_event/:id' => 'events#decline_event', as: 'decline_event'
 end

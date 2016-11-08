@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_recipe]
 
   # GET /recipes
   # GET /recipes.json
@@ -66,6 +66,8 @@ class RecipesController < ApplicationController
   end
 
   def add_recipe
+    UserRecipe.create(user: current_user, recipe: @recipe)
+    redirect_to my_recipes_path, notice: 'Recipe was successfully created.'
 
   end
 

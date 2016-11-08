@@ -1,7 +1,7 @@
 <div class="container">
   <div class="page-header">
     <div class="row">
-      <h1 class="text-center"><%= @recipe.name %></h1>
+      <h1 class="text-center"><%= @recipe.name %> <%= link_to 'Add', add_recipe_path(@recipe), class: 'btn btn-success btn-xs', method: :post %></h1>
     </div>
   </div>
 
