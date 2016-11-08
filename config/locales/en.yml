@@ -313,3 +313,6 @@ en:
     add_event: "Add new Event"
     edit_event: "Edit Event"
     select_friends: "Invite your friends"
+  recipes:
+    introduction: "Instructions"
+

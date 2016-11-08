@@ -1,29 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <h1 class="text-center"><%= @recipe.name %></h1>
+    </div>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @recipe.name %>
-</p>
+  <div class="container text-center">
+    <%= image_tag(@recipe.picture_url, :alt => "recipes", class: "img-rounded", width: "304", height: "236") %>
+  </div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @recipe.url %>
-</p>
+  <div class="row">
+    <h2 class="text-center"><%= t('recipes.instructions') %></h2>
+  </div>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <p class="text-center"><%= @recipe.instructions %></p>
+    </div>
+  </div>
+  <div class="row">
+    <h2 class="text-center"><%= t('allergies.allergies_header') %></h2>
+  </div>
+  <% @recipe.allergies.each do |allergy| %>
+    <div class="row text-center">
+      <p>allergy.name</p>
+    </div>
+  <% end %>
+  <div class="row">
+    <h2 class="text-center"><%= t('ingredients.ingredients') %></h2>
+  </div>
+  <% @recipe.ingredients.each do |ingredient| %>
+      <div class="row text-center">
+        <p>ingredient.name</p>
+      </div>
+  <% end %>
 
-<p>
-  <strong>Instructions:</strong>
-  <%= @recipe.instructions %>
-</p>
-
-<p>
-  <strong>Picture url:</strong>
-  <%= @recipe.picture_url %>
-</p>
-
-<p>
-  <strong>Menu type:</strong>
-  <%= @recipe.menu_type %>
-</p>
-
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+  <div class="row text-center">
+    <%= link_to 'Original page', "http://#{@recipe.url}", class: "btn btn-success" %>
+  </div>
+</div>
