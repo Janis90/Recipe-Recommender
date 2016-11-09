@@ -206,6 +206,7 @@ DEPENDENCIES
   has_friendship
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri (~> 1.6.8.1)
   pg
   pgreset (~> 0.1.1)
   rails (= 4.2.6)

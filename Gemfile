@@ -45,6 +45,9 @@ gem 'has_friendship'
 #Datepicker for selecting dates in a form
 gem 'bootstrap-datepicker-rails'
 
+# Needed for web scraping
+gem 'nokogiri', '~> 1.6.8.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
