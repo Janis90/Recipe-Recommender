@@ -4,7 +4,7 @@ URL = 'http://www.lecker-ohne.de'
 
 # The WebCrawler is a general focused crawler. It saves the URLs to single recipies which are visited by workers
 class WebCrawler
-  require 'open-uri'
+  #require 'open-uri'
 
   def initialize(overview_url, menu_type)
     @url = overview_url
@@ -59,7 +59,9 @@ class WebCrawler
 
   def extract_next_page(url)
     page = Nokogiri::HTML(open(url))
-    @next_page = page.css('li.pager-next a')[0]['href']
+    unless page.css('li.pager-next a')[0].nil?
+      @next_page = page.css('li.pager-next a')[0]['href']
+    end
     unless @next_page == ""
       @next_page = URL + @next_page
     end
@@ -75,7 +77,7 @@ end
 # The Worker is called by the WebCrawler after it has collected all URLs leading to recipies from one page.
 # The Worker extracts all important informations and stores them into a JSON-File.
 class Worker
-  require 'open-uri'
+  #require 'open-uri'
 
   def initialize(url, menu_type)
     @url = url
@@ -96,14 +98,20 @@ class Worker
     instructions = []
     allergies = []
 
-    require 'open-uri'
+    #require 'open-uri'
     page = Nokogiri::HTML(open(@url))
     name = page.css('h1.title')[0].text
     page.css('ul.field-rezeptzutaten li').each{ |incredient| incredients << incredient.text }
     page.css('div#node-rezept-full-group-infos div.field-taxonomy-vocabulary-3').each{ |intolerance| intolerances << intolerance.text }
     page.css('div.ds-1col p').each{ |instruction| instructions << instruction.text}
     page.css('ul.field-rezeptallergien li').each { |allergy| allergies << allergy.text }
-    picture_url = page.css('div.field-rezeptbild img')[0]['src']
+    #picture might not exist
+    if page.css('div.field-rezeptbild img')[0].nil?
+      #Platzhalter
+      picture_url = 'http://www.brennholz-brandl.de/images/pictures/platzhalter-bild.jpg'
+    else
+      picture_url = page.css('div.field-rezeptbild img')[0]['src']
+    end
 
     create_recipe(name, incredients, intolerances, instructions, allergies, picture_url)
   end
@@ -134,21 +142,32 @@ class Worker
     # Allergies and Intolerances are saved both as allergies due to their similarity
     allergies << intolerances
 
-    Recipe.create(name: recipe[:name], url: recipe[:url], instructions: recipe[:instructions],
-                  picture_url: recipe[:picture_url], menu_type: recipe[:menu_type])
+    # recipe[:name == "Mandelwaffeln mit Brombeercreme" is needed because lecker-ohne has an wrong entry
+    unless Recipe.exists?(url: recipe[:url]) || recipe[:name] == "Mandelwaffeln mit Brombeercreme" || recipe[:name] == "Chili vegetarisch" || recipe[:name] ==  "Zwiebelkuchen vegetarisch"
+      Recipe.create(name: recipe[:name], url: recipe[:url], instructions: recipe[:instructions],
+                    picture_url: recipe[:picture_url], menu_type: recipe[:menu_type])
 
-    recipe_from_db = Recipe.where(url: recipe[:url]).first
+      recipe_from_db = Recipe.where(url: recipe[:url]).first
+      # is needed because somethimes there is an mistake on essen-ohne so that the recipe can't be saved
+      unless recipe_from_db.nil?
+        ingredients.each do |ingredient|
+          unless Ingredient.exists?(name: ingredient)
+            Ingredient.create(name: ingredient)
+          end
+          ingredient_from_db = Ingredient.where(name: ingredient).first
+          unless RecipeIngredient.exists?(recipe_id: recipe_from_db.id, ingredient_id: ingredient_from_db.id)
+            RecipeIngredient.create(recipe_id: recipe_from_db.id, ingredient_id: ingredient_from_db.id )
+          end
+        end
 
-    ingredients.each do |ingredient|
-      Ingredient.create(name: ingredient) unless Ingredient.exists?(name: ingredient)
-      ingredient_from_db = Ingredient.where(name: ingredient).first
-      RecipeIngredient.create(recipe_id: recipe_from_db.id, ingredient_id: ingredient_from_db.id )
-    end
-
-    allergies.each do |allergy|
-      if Allergy.exists?(name: allergy)
-        allergy_from_db = Allergy.where(name: allergy)
-        RecipeAllergy.create(recipe_id: recipe_from_db.id, allergy_id: allergy_from_db.id)
+        allergies.each do |allergy|
+          if Allergy.exists?(name: allergy)
+            allergy_from_db = Allergy.where(name: allergy).first
+            unless RecipeAllergy.exists?(recipe_id: recipe_from_db.id, allergy_id: allergy_from_db.id )
+              RecipeAllergy.create(recipe_id: recipe_from_db.id, allergy_id: allergy_from_db.id)
+            end
+          end
+        end
       end
     end
   end

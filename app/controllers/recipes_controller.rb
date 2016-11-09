@@ -71,16 +71,16 @@ class RecipesController < ApplicationController
   end
 
   def search_for_recipes
-    require 'open-uri'
+    #require 'open-uri'
     #TODO add other categories
-    crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?&ka=1&titel=&field_rezeptzutaten_value=&&items_per_page=60', 'Vorspeise')
-    crawler.crawl
+    #crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?&ka=1&titel=&field_rezeptzutaten_value=&&items_per_page=60', 'Vorspeise')
+    #crawler.crawl
 
-    # crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?ka=6&titel=&field_rezeptzutaten_value=&items_per_page=60', 'Hauptgericht')
-    # crawler.crawl
-    #
-    # crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?ka=7&titel=&field_rezeptzutaten_value=&items_per_page=60', 'Dessert')
-    # crawler.crawl
+     crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?&ka=6&titel=&field_rezeptzutaten_value=&&items_per_page=60&page=2', 'Hauptgericht')
+     crawler.crawl
+
+     #crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?ka=7&titel=&field_rezeptzutaten_value=&items_per_page=60', 'Dessert')
+     #crawler.crawl
     redirect_to recipes_url, notice: 'Recipes added.'
   end
 

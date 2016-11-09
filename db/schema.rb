@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104124824) do
+ActiveRecord::Schema.define(version: 20161109170819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161104124824) do
   end
 
   add_index "recipe_allergies", ["allergy_id"], name: "index_recipe_allergies_on_allergy_id", using: :btree
+  add_index "recipe_allergies", ["recipe_id", "allergy_id"], name: "index_recipe_allergies_on_recipe_id_and_allergy_id", unique: true, using: :btree
   add_index "recipe_allergies", ["recipe_id"], name: "index_recipe_allergies_on_recipe_id", using: :btree
 
   create_table "recipe_ingredients", force: :cascade do |t|
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20161104124824) do
   end
 
   add_index "recipe_ingredients", ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id", using: :btree
+  add_index "recipe_ingredients", ["recipe_id", "ingredient_id"], name: "index_recipe_ingredients_on_recipe_id_and_ingredient_id", unique: true, using: :btree
   add_index "recipe_ingredients", ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id", using: :btree
 
   create_table "recipes", force: :cascade do |t|
@@ -115,6 +117,16 @@ ActiveRecord::Schema.define(version: 20161104124824) do
   add_index "user_ingredients", ["ingredient_id"], name: "index_user_ingredients_on_ingredient_id", using: :btree
   add_index "user_ingredients", ["user_id"], name: "index_user_ingredients_on_user_id", using: :btree
 
+  create_table "user_recipes", force: :cascade do |t|
+    t.integer  "recipe_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_recipes", ["recipe_id"], name: "index_user_recipes_on_recipe_id", using: :btree
+  add_index "user_recipes", ["user_id"], name: "index_user_recipes_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "first_name"
@@ -148,4 +160,6 @@ ActiveRecord::Schema.define(version: 20161104124824) do
   add_foreign_key "user_events", "users"
   add_foreign_key "user_ingredients", "ingredients"
   add_foreign_key "user_ingredients", "users"
+  add_foreign_key "user_recipes", "recipes"
+  add_foreign_key "user_recipes", "users"
 end
