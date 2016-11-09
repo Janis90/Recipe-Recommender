@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   get 'my_recipes' => 'recipes#my_recipes', as: 'my_recipes'
   post 'recipes/add_recipe/:id' => 'recipes#add_recipe', as: 'add_recipe'
+  post 'search_for_recipes' => 'recipes#search_for_recipes', as: 'search_for_recipes'
 
  delete 'decline_event/:id' => 'events#decline_event', as: 'decline_event'
 end

@@ -22,7 +22,7 @@
   </div>
   <% @recipe.allergies.each do |allergy| %>
     <div class="row text-center">
-      <p>allergy.name</p>
+      <p><%= allergy.name %></p>
     </div>
   <% end %>
   <div class="row">
@@ -30,7 +30,7 @@
   </div>
   <% @recipe.ingredients.each do |ingredient| %>
       <div class="row text-center">
-        <p>ingredient.name</p>
+        <p><%= ingredient.name %></p>
       </div>
   <% end %>
 

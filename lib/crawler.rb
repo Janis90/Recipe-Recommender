@@ -1,19 +1,13 @@
-#require 'json'
-#require 'rubygems'
-#require 'nokogiri'
 require 'open-uri'
 
-URL = 'www.lecker-ohne.de'
-
-#TODO page.html -> url
-#TODO do not save the same recipe twice
+URL = 'http://www.lecker-ohne.de'
 
 # The WebCrawler is a general focused crawler. It saves the URLs to single recipies which are visited by workers
 class WebCrawler
+  require 'open-uri'
 
-  def initialize(overview_url, result_file, menu_type)
+  def initialize(overview_url, menu_type)
     @url = overview_url
-    @file = result_file
     @menu_type = menu_type
     @next_page
   end
@@ -21,17 +15,25 @@ class WebCrawler
   public
 
   def crawl
+    url_already_exists = false
 
-    urls = extract_child_nodes
+    urls = extract_child_nodes(@url)
 
     if urls.any?
-      urls.each{ |url| call_worker(url) }
+      urls.each do |url|
+        if Recipe.exists?(url: url)
+          url_already_exists = true
+        else
+          call_worker(url)
+        end
+        call_worker(url)
+      end
     end
 
-    extract_next_page
+    extract_next_page(@url)
 
-    unless @next_page == ""
-      web_crawler = WebCrawler.new(@next_page, @file, @menu_type)
+    unless @next_page == "" || url_already_exists
+      web_crawler = WebCrawler.new(@next_page, @menu_type)
       web_crawler.crawl
     end
   end
@@ -39,10 +41,10 @@ class WebCrawler
   private
 
   # Collects all URLs leading to recipies from a given URL.
-  def extract_child_nodes
+  def extract_child_nodes(url)
     urls = []
     first_link = true
-    page = Nokogiri::HTML(open("page.html"))
+    page = Nokogiri::HTML(open(url))
 
     page.css('div.view-content a').each{ |link|
       #div.view-content a contains of two links which lead to the same page
@@ -55,16 +57,17 @@ class WebCrawler
     urls
   end
 
-  def extract_next_page
-    page = Nokogiri::HTML(open("page.html"))
+  def extract_next_page(url)
+    page = Nokogiri::HTML(open(url))
     @next_page = page.css('li.pager-next a')[0]['href']
     unless @next_page == ""
       @next_page = URL + @next_page
     end
+    @next_page
   end
 
   def call_worker(url)
-    worker = Worker.new(url, @result_file, @menu_type)
+    worker = Worker.new(url, @menu_type)
     worker.crawl
   end
 end
@@ -72,18 +75,20 @@ end
 # The Worker is called by the WebCrawler after it has collected all URLs leading to recipies from one page.
 # The Worker extracts all important informations and stores them into a JSON-File.
 class Worker
+  require 'open-uri'
 
-  def initialize(url, result_file, menu_type)
+  def initialize(url, menu_type)
     @url = url
-    @result_file = result_file
     @menu_type = menu_type
   end
 
   public
 
   def crawl
-    #TODO
+    get_recipe_information
   end
+
+  private
 
   def get_recipe_information
     incredients = []
@@ -91,7 +96,8 @@ class Worker
     instructions = []
     allergies = []
 
-    page = Nokogiri::HTML(open("recipe_page.html"))
+    require 'open-uri'
+    page = Nokogiri::HTML(open(@url))
     name = page.css('h1.title')[0].text
     page.css('ul.field-rezeptzutaten li').each{ |incredient| incredients << incredient.text }
     page.css('div#node-rezept-full-group-infos div.field-taxonomy-vocabulary-3').each{ |intolerance| intolerances << intolerance.text }
@@ -99,31 +105,51 @@ class Worker
     page.css('ul.field-rezeptallergien li').each { |allergy| allergies << allergy.text }
     picture_url = page.css('div.field-rezeptbild img')[0]['src']
 
-    create_and_store_recipe(name, incredients, intolerances, instructions, allergies, picture_url)
+    create_recipe(name, incredients, intolerances, instructions, allergies, picture_url)
   end
 
-  def create_and_store_recipe(name, incredients, intolerances, instructions, allergies, picture_url)
+  def create_recipe(name, ingredients, intolerances, instructions, allergies, picture_url)
     recipe = {}
     sanitizer = Sanitizer.new
     recipe[:name] = name
-    recipe[:incredients] = sanitizer.sanitize_ingredients(incredients)
+    recipe[:ingredients] = sanitizer.sanitize_ingredients(ingredients)
     #recipe[:url] = @url
     #TODO needs to be sanitized
     recipe[:intolerances] = sanitizer.sanitize_intolerances(intolerances)
-    recipe[:instructions] = instructions
+    recipe[:instructions] = sanitizer.sanitize_instructions(instructions)
     #TODO needs to be sanitized
     recipe[:allergies] = sanitizer.sanitize_allergies(allergies)
     recipe[:picture_url] = picture_url
     recipe[:menu_type] = @menu_type
     recipe[:url] = @url
 
-    puts recipe
-    #store_recipe_as_json(recipe)
+    store_recipe(recipe)
   end
 
-  def store_recipe_as_json(recipe)
-    File.open(@result_file, 'a') do |file|
-      file.write(recipe.to_json)
+  def store_recipe(recipe)
+    ingredients = recipe[:ingredients]
+    allergies = recipe[:allergies]
+    intolerances = recipe[:intolerances]
+
+    # Allergies and Intolerances are saved both as allergies due to their similarity
+    allergies << intolerances
+
+    Recipe.create(name: recipe[:name], url: recipe[:url], instructions: recipe[:instructions],
+                  picture_url: recipe[:picture_url], menu_type: recipe[:menu_type])
+
+    recipe_from_db = Recipe.where(url: recipe[:url]).first
+
+    ingredients.each do |ingredient|
+      Ingredient.create(name: ingredient) unless Ingredient.exists?(name: ingredient)
+      ingredient_from_db = Ingredient.where(name: ingredient).first
+      RecipeIngredient.create(recipe_id: recipe_from_db.id, ingredient_id: ingredient_from_db.id )
+    end
+
+    allergies.each do |allergy|
+      if Allergy.exists?(name: allergy)
+        allergy_from_db = Allergy.where(name: allergy)
+        RecipeAllergy.create(recipe_id: recipe_from_db.id, allergy_id: allergy_from_db.id)
+      end
     end
   end
 end
@@ -186,31 +212,29 @@ class Sanitizer
     sanitized_allergies = []
 
     allergies.each do |allergy|
-      sanitized_allergies << allergy[6, allergy.size-1]
+      sanitized_allergies << allergy[6, allergy.size-1] + "-Unverträglichkeit"
     end
 
     sanitized_allergies
   end
+
+  def sanitize_instructions(instructions)
+    merged_instructions = ""
+    instructions.each do |instruction|
+      merged_instructions += " " + instruction
+    end
+    merged_instructions
+  end
 end
 
 
+#crawler = WebCrawler.new("http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=60", "result.json", "dessert")
+#crawler.extract_child_nodes("http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=60")
+#puts "___________"
+#crawler.extract_next_page("http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=60")
 
-#probably not needed
-def run(overview_url, result_file, menu_type)
-  #TODO perhaps clean result_file; perhaps w -> a
-  open(result_file, 'w') { |f| f.puts "[" }
-  crawler = Crawler.new(overview_url, result_file, menu_type)
-  crawler.crawl
-  #TODO delete last character from file
-  File.open(filename, 'a') { |f| f.write "]"}
-end
-
-#crawler = WebCrawler.new("page.html", "result.json", "dessert")
-#crawler.extract_next_page
-#crawler.extract_next_page
-
-worker = Worker.new('recipe_page.html', 'result.json', 'dessert')
-worker.get_recipe_information
+#worker = Worker.new('recipe_page.html', 'result.json', 'dessert')
+#worker.get_recipe_information
 #s = Sanitizer.new
 ##ing = [" 200g Salatgurke"," 150g Zucchini"," 75g grüne 2 Bund Paprika"," 1 Avocado"," je 1/2 Bund Blattpetersilie und Koriander"," 250ml Gemüsebrühe"," Salz, Pfeffer"," Für die Test Spieße:"," 250g Hähnchenbrust"," Salz, Chili"," 2 El Sesam"," 2 El Rapsöl"]
 #intol = [" Diabetes"," Fructoseunverträglichkeit"," Laktoseintoleranz"," Nahrungsmittelallergien"," Rheuma"," Zöliakie, Sprue"]
@@ -219,3 +243,5 @@ worker.get_recipe_information
 
 #all = [" ohne Kuhmilch"," ohne Soja"," ohne Ei"," ohne Weizen"]
 #s.sanitize_allergies(all)
+
+

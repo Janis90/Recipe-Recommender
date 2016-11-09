@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+        <div class="row text-center">
+          <p>Search for new recipes</p>
+          <%= link_to("Search", search_for_recipes_path, method: :post, class: 'btn btn-success', style: 'margin-bottom: 20px') %>
+        </div>
+        <div class="row">
+
+        </div>
+    <%end %>
+<% end %>

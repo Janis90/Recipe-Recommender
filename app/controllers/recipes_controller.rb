@@ -67,8 +67,21 @@ class RecipesController < ApplicationController
 
   def add_recipe
     UserRecipe.create(user: current_user, recipe: @recipe)
-    redirect_to my_recipes_path, notice: 'Recipe was successfully created.'
+    redirect_to my_recipes_path, notice: 'Recipe was successfully added.'
+  end
 
+  def search_for_recipes
+    require 'open-uri'
+    #TODO add other categories
+    crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?&ka=1&titel=&field_rezeptzutaten_value=&&items_per_page=60', 'Vorspeise')
+    crawler.crawl
+
+    # crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?ka=6&titel=&field_rezeptzutaten_value=&items_per_page=60', 'Hauptgericht')
+    # crawler.crawl
+    #
+    # crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?ka=7&titel=&field_rezeptzutaten_value=&items_per_page=60', 'Dessert')
+    # crawler.crawl
+    redirect_to recipes_url, notice: 'Recipes added.'
   end
 
   private
