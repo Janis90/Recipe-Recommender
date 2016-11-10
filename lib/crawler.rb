@@ -1,11 +1,10 @@
 require 'open-uri'
+require 'nokogiri'
 
 URL = 'http://www.lecker-ohne.de'
 
 # The WebCrawler is a general focused crawler. It saves the URLs to single recipies which are visited by workers
 class WebCrawler
-  #require 'open-uri'
-
   def initialize(overview_url, menu_type)
     @url = overview_url
     @menu_type = menu_type
@@ -15,25 +14,21 @@ class WebCrawler
   public
 
   def crawl
-    url_already_exists = false
-
     urls = extract_child_nodes(@url)
 
     if urls.any?
       urls.each do |url|
-        if Recipe.exists?(url: url)
-          url_already_exists = true
-        else
-          call_worker(url)
-        end
         call_worker(url)
       end
     end
 
     extract_next_page(@url)
 
-    unless @next_page == "" || url_already_exists
+    puts @next_page
+    unless @next_page == ""
       web_crawler = WebCrawler.new(@next_page, @menu_type)
+      #In order to prevent the connection from being canceled
+      sleep(30)
       web_crawler.crawl
     end
   end
@@ -61,11 +56,10 @@ class WebCrawler
     page = Nokogiri::HTML(open(url))
     unless page.css('li.pager-next a')[0].nil?
       @next_page = page.css('li.pager-next a')[0]['href']
-    end
-    unless @next_page == ""
       @next_page = URL + @next_page
+    else
+      @next_page = ""
     end
-    @next_page
   end
 
   def call_worker(url)
@@ -77,8 +71,6 @@ end
 # The Worker is called by the WebCrawler after it has collected all URLs leading to recipies from one page.
 # The Worker extracts all important informations and stores them into a JSON-File.
 class Worker
-  #require 'open-uri'
-
   def initialize(url, menu_type)
     @url = url
     @menu_type = menu_type
@@ -121,7 +113,6 @@ class Worker
     sanitizer = Sanitizer.new
     recipe[:name] = name
     recipe[:ingredients] = sanitizer.sanitize_ingredients(ingredients)
-    #recipe[:url] = @url
     #TODO needs to be sanitized
     recipe[:intolerances] = sanitizer.sanitize_intolerances(intolerances)
     recipe[:instructions] = sanitizer.sanitize_instructions(instructions)
@@ -130,6 +121,7 @@ class Worker
     recipe[:picture_url] = picture_url
     recipe[:menu_type] = @menu_type
     recipe[:url] = @url
+    puts recipe[:ingredients]
 
     store_recipe(recipe)
   end
@@ -142,13 +134,13 @@ class Worker
     # Allergies and Intolerances are saved both as allergies due to their similarity
     allergies << intolerances
 
-    # recipe[:name == "Mandelwaffeln mit Brombeercreme" is needed because lecker-ohne has an wrong entry
-    unless Recipe.exists?(url: recipe[:url]) || recipe[:name] == "Mandelwaffeln mit Brombeercreme" || recipe[:name] == "Chili vegetarisch" || recipe[:name] ==  "Zwiebelkuchen vegetarisch"
+    unless Recipe.exists?(url: recipe[:url])
       Recipe.create(name: recipe[:name], url: recipe[:url], instructions: recipe[:instructions],
                     picture_url: recipe[:picture_url], menu_type: recipe[:menu_type])
 
       recipe_from_db = Recipe.where(url: recipe[:url]).first
-      # is needed because somethimes there is an mistake on essen-ohne so that the recipe can't be saved
+
+      # is needed because sometimes there is an mistake on essen-ohne so that the recipe can't be saved (e.g. empty instructions)
       unless recipe_from_db.nil?
         ingredients.each do |ingredient|
           unless Ingredient.exists?(name: ingredient)
@@ -179,27 +171,45 @@ class Sanitizer
   #This function extracts only the main ingredient
   def sanitize_ingredients(array_of_ingredient_descriptions)
     #TODO to be completed
-    ignore_words = ['Schreibe', 'Stück', 'Bund', 'Fett', 'Prise', 'Tk', 'El', 'Tl' 'TK', 'EL', 'TL']
+    ignore_words = %w(Scheibe Scheiben Stück Bund Fett Prise Tk El Tr Tl TK EL TL Pk Stk Doppelrahmstufe Dressing
+                      Msp Pkt Tüte Bsp Typ Pck Stücke Deko Pr Priese Je Msp Beutel Stärke Tropfen Form Schale Abrieb
+                      Dose Type Holzspieße Belieben Konserve Saft Kg Liter Kräuter Förmchen Deko Kerzen Kilo Blatt
+                      L Pulver Geschmack Rinde Backen Stiele Stiel Pfanne Stein ½ Stange Braten Packung Pack Formen)
     sanitized_array_of_ingredients = []
 
     array_of_ingredient_descriptions.each do |ingredient_description|
       ingredient_description.split(" ").each do |word|
-        #some words contain a ',' at the end, which needs to be deleted
-        word.chomp!(",")
+        tb_ignored = false
 
+        #some words contain a ',' or another character at the end, which needs to be deleted
+        word.chomp!(",")
+        word.chomp!(";")
+        word.chomp!(")")
+        word.chomp!("/")
+        word.chomp!("-")
+        word.chomp!(".")
+        # in case of '...'
+        word.chomp!("..")
+        word.chomp!("+")
+        word.chomp!("*")
+        word.chomp!("&")
+        word.chomp!(":")
+        word.chomp!(";")
+
+        #In case of 'Für die ...:'
         if word == 'Für'
           break
         end
 
-        tb_ignored = false
+
         ignore_words.each do |ignore|
-          if word.capitalize == ignore
+          if word.upcase == ignore.upcase
             tb_ignored = !tb_ignored
             break
           end
         end
 
-        if word == word.capitalize && word != 'El' && word != 'Tl' && !tb_ignored
+        if word == word.capitalize && !tb_ignored && word != ""
           unless word.start_with?('(') || word.start_with?(*('0' .. '9'))
             sanitized_array_of_ingredients << word
           end
@@ -216,7 +226,7 @@ class Sanitizer
     intolerances.each do |intolerance|
       #the crawled intolerances sometimes have a whitespace at the beginning
       intolerance.gsub!(/\s+/, '')
-      #puts intolerance
+
       possible_intolerances.each do |p_intolerance|
         if intolerance == p_intolerance
           sanitized_intolerances << intolerance
@@ -245,22 +255,3 @@ class Sanitizer
     merged_instructions
   end
 end
-
-
-#crawler = WebCrawler.new("http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=60", "result.json", "dessert")
-#crawler.extract_child_nodes("http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=60")
-#puts "___________"
-#crawler.extract_next_page("http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=60")
-
-#worker = Worker.new('recipe_page.html', 'result.json', 'dessert')
-#worker.get_recipe_information
-#s = Sanitizer.new
-##ing = [" 200g Salatgurke"," 150g Zucchini"," 75g grüne 2 Bund Paprika"," 1 Avocado"," je 1/2 Bund Blattpetersilie und Koriander"," 250ml Gemüsebrühe"," Salz, Pfeffer"," Für die Test Spieße:"," 250g Hähnchenbrust"," Salz, Chili"," 2 El Sesam"," 2 El Rapsöl"]
-#intol = [" Diabetes"," Fructoseunverträglichkeit"," Laktoseintoleranz"," Nahrungsmittelallergien"," Rheuma"," Zöliakie, Sprue"]
-##s.sanitize_ingredients(a)
-#s.sanitize_intolerances(intol)
-
-#all = [" ohne Kuhmilch"," ohne Soja"," ohne Ei"," ohne Weizen"]
-#s.sanitize_allergies(all)
-
-

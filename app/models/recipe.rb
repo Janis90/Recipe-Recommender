@@ -9,6 +9,6 @@ class Recipe < ActiveRecord::Base
   validates :name,          presence: true
   validates :instructions,  presence: true
 
-  MENU_TYPE = ["Main Course", "Starter", "Dessert"].freeze
+  MENU_TYPE = ["Vorspeise", "Hauptgericht", "Dessert"].freeze
 
 end
