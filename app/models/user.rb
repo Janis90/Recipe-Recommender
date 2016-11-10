@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :events, class_name: "Event", foreign_key: "creator_id"
   has_many :user_recipes, dependent: :destroy
   has_many :recipes, through: :user_recipes
+  has_many :events, class_name: "Recipe", foreign_key: "recipe_creator_id"
 
   has_many :user_ingredients, dependent: :destroy
   has_many :ingredients, through: :user_ingredients

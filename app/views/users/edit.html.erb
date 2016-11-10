@@ -23,20 +23,20 @@
   </div>
   <!-- Display user's allergies -->
   <%= form_for (@user) do |f| %>
-    <div class="row">
-      <div class="col-xs-4 col-xs-offset-5 col-sm-4 col-sm-offset-5 col-md-4 col-md-offset-5 col-lg-4 col-lg-offset-5">
-        <%= f.collection_check_boxes(:allergy_ids, Allergy.all, :id, :name) do |a| %>
-          <div class="checkbox">
-            <label>
-              <%= a.check_box(class: "check_box") %><%= a.object.name %>
-            </label>
-          </div>
-        <% end %>
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-5 col-sm-4 col-sm-offset-5 col-md-4 col-md-offset-5 col-lg-4 col-lg-offset-5">
+          <%= f.collection_check_boxes(:allergy_ids, Allergy.all, :id, :name) do |a| %>
+              <div class="checkbox">
+                <label>
+                  <%= a.check_box(class: "check_box") %><%= a.object.name %>
+                </label>
+              </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="row text-center">
-      <%= f.submit t('helpers.submit.update', :model => t('user.user')), class: 'btn btn-default' %>
-    </div>
+      <div class="row text-center">
+        <%= f.submit t('helpers.submit.update', :model => t('user.user')), class: 'btn btn-default' %>
+      </div>
   <% end %>
 
   <div class="row">
@@ -44,23 +44,23 @@
   </div>
 
   <div class="row">
-      <!-- Display user's food rating results-->
-      <%= form_for @user do |f| %>
+    <!-- Display user's food rating results-->
+    <%= form_for @user do |f| %>
         <%= f.fields_for :user_ingredients do |u| %>
-          <div class="row">
-            <h4 class="text-center"><%= u.object.ingredient.name %></h4>
-          </div>
-          <div class="row text-center">
-            <% @priorities.each do |index, name| %>
-              <label class="radio-inline">
-                <%= u.radio_button :rating, index, class: 'radio' %><%= name %>
-              </label>
-            <% end %>
-          </div>
+            <div class="row">
+              <h4 class="text-center"><%= u.object.ingredient.name %></h4>
+            </div>
+            <div class="row text-center">
+              <% @priorities.each do |index, name| %>
+                  <label class="radio-inline">
+                    <%= u.radio_button :rating, index, class: 'radio' %><%= name %>
+                  </label>
+              <% end %>
+            </div>
         <% end %>
         <div class="row text-center">
           <%= f.submit t('helpers.submit.update', :model => t('user.user')), class: 'btn btn-default' %>
         </div>
-      <% end %>
-    </div>
+    <% end %>
   </div>
+</div>

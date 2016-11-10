@@ -6,6 +6,8 @@ class Recipe < ActiveRecord::Base
   has_many :user_recipes, dependent: :destroy
   has_many :users, through: :user_recipes
 
+  belongs_to :recipe_creator, class_name: "User"
+
   validates :name,          presence: true
   validates :instructions,  presence: true
 

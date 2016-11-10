@@ -315,4 +315,6 @@ en:
     select_friends: "Invite your friends"
   recipes:
     introduction: "Instructions"
+    add_recipe: "Add Recipe"
+    edit_recipe: "Edit Recipe"
 

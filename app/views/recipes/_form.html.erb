@@ -1,37 +1,43 @@
-<%= form_for(@recipe) do |f| %>
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+<div class="container">
+  <%= form_for(@recipe) do |f| %>
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :url %>
+            <%= f.text_field :url, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :instructions %>
+            <%= f.text_area :instructions, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :picture_url %>
+            <%= f.text_field :picture_url, class: 'form-control' %>
+          </div>
 
-      <ul>
-      <% @recipe.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+          <div class="row text-center">
+          <% @menu_types.each do |item| %>
+              <label class="radio-inline">
+              <%= f.radio_button :menu_type, item, class: 'radio' %> <%= item %><br />
+                </label>
+          <% end %>
+            </div>
+          <h3 class="text-center"><%= t('allergies.allergies_header') %></h3>
+          <%= f.collection_check_boxes(:allergy_ids, Allergy.all, :id, :name) do |a| %>
+              <div class="checkbox">
+                <label>
+                  <%= a.check_box(class: "check_box") %><%= a.object.name %>
+                </label>
+              </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row text-center">
+        <%= f.submit t('forms.buttons.submit'), class: 'btn btn-primary' %>
+      </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :instructions %><br>
-    <%= f.text_area :instructions %>
-  </div>
-  <div class="field">
-    <%= f.label :picture_url %><br>
-    <%= f.text_field :picture_url %>
-  </div>
-  <div class="field">
-    <%= f.label :menu_type %><br>
-    <%= f.text_field :menu_type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
