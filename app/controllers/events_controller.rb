@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @my_events = Event.where(creator_id: current_user.id)
+    @my_events = Event.where('creator_id = ? and date >= ?', current_user.id, Date.today)
     @invitations = []
     user_events = UserEvent.where(user_id: current_user.id)
 

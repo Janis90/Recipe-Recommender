@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_recipe]
   before_action :set_menu_types, only: [:new, :create, :edit, :update]
   before_action :set_allergies, only: [:new, :edit]
+  before_action :set_ingredients, only: [:new, :edit]
 
   # GET /recipes
   # GET /recipes.json
@@ -26,10 +27,11 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    debugger
+
     @recipe = Recipe.new(recipe_params)
     @recipe.recipe_creator_id = current_user.id
     @recipe.allergies = get_allergies_from_params
+    @recipe.ingredients = get_selected_ingredients
 
     respond_to do |format|
       if @recipe.save
@@ -97,7 +99,7 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :url, :instructions, :picture_url, :menu_type, allergy_ids: [])
+      params.require(:recipe).permit(:name, :url, :instructions, :picture_url, :menu_type, allergy_ids: [], ingredient_ids: [])
     end
 
     def set_menu_types
@@ -106,6 +108,14 @@ class RecipesController < ApplicationController
 
     def set_allergies
       @allergies = Allergy.all
+    end
+
+    def set_ingredients
+      @ingredients = Ingredient.all
+    end
+
+    def get_selected_ingredients
+      @selected_ingredients = Ingredient.where(id: recipe_params[:ingredient_ids])
     end
 
     def get_allergies_from_params

@@ -170,11 +170,13 @@ class Sanitizer
   #Incredients look like e.g. like '200 g Frischkäse (10% Fett)'
   #This function extracts only the main ingredient
   def sanitize_ingredients(array_of_ingredient_descriptions)
-    #TODO to be completed
-    ignore_words = %w(Scheibe Scheiben Stück Bund Fett Prise Tk El Tr Tl TK EL TL Pk Stk Doppelrahmstufe Dressing
-                      Msp Pkt Tüte Bsp Typ Pck Stücke Deko Pr Priese Je Msp Beutel Stärke Tropfen Form Schale Abrieb
-                      Dose Type Holzspieße Belieben Konserve Saft Kg Liter Kräuter Förmchen Deko Kerzen Kilo Blatt
-                      L Pulver Geschmack Rinde Backen Stiele Stiel Pfanne Stein ½ Stange Braten Packung Pack Formen)
+    ignore_words = %w(Abrieb American Anbraten Ausrollen Backen Becher Belieben Beutel Bestäuben Bestreuen Blatt Braten Brühe Bsp Bund
+                      Deko Deko Doppelrahmstufe Dose Dressing Einfetten EL El
+                      Fett Form Formen Förmchen Fruchtfleisch Geschmack Gewürze Glas Grillen Holzspieße
+                      Instant Je Kerzen Kg Kilo Klein Kleine Kleines Konserve Kräuter Kräutern Kugel Kugeln L Liter Magerstufe Mark Mischung Msp Msp Mühle
+                      Nacht Papierförmchen Pack Packung Pck Pfanne Pk Pkt Pr Priese Prise Pulver Rinde
+                      Saft Salzwasser Schale Scheibe Scheiben Schuß Stange Stein Stiel Stiele Stk Stärke Stück Stücke Süßstoff
+                      Teil TK TL Tk Tl Tr Trinkwasser Tropfen Typ Type Tütchen Tüte Wasser Würfel Würzen Zweig ½)
     sanitized_array_of_ingredients = []
 
     array_of_ingredient_descriptions.each do |ingredient_description|

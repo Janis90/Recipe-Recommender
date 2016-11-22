@@ -1,7 +1,10 @@
 <div class="container">
   <%= form_for(@recipe) do |f| %>
+      <div class="row text-center">
+        <%= f.submit t('forms.buttons.submit'), class: 'btn btn-primary' %>
+      </div>
       <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
           <div class="form-group">
             <%= f.label :name %>
             <%= f.text_field :name, class: 'form-control' %>
@@ -34,10 +37,18 @@
                 </label>
               </div>
           <% end %>
+          <h3 class="text-center">Ingredients</h3>
+          <%= f.collection_check_boxes(:ingredient_ids, @ingredients, :id, :name) do |a| %>
+              <div class="checkbox">
+                <label>
+                  <%= a.check_box(class: "check_box") %><%= a.object.name %>
+                </label>
+              </div>
+          <% end %>
         </div>
       </div>
-      <div class="row text-center">
-        <%= f.submit t('forms.buttons.submit'), class: 'btn btn-primary' %>
-      </div>
   <% end %>
+  <div class="row text-center">
+    <%= link_to 'Add ingredient', new_ingredient_path, class: 'btn btn-success' %>
+  </div>
 </div>
