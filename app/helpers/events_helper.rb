@@ -14,4 +14,8 @@ module EventsHelper
   def render_not_participate_button(event)
     link_to  "<i class='glyphicon glyphicon-remove-sign'></i>".html_safe, decline_event_path(event), method: :delete, class: 'btn btn-warning'
   end
+
+  def render_get_recommendations_button(event)
+    link_to "Recommender: let's go!", show_recommendations_path(event), class: 'btn btn-success'
+  end
 end

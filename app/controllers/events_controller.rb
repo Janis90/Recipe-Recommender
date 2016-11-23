@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :decline_event]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :decline_event, :show_recommendations]
   before_action :set_friends, only: [:new, :edit, :create, :update]
 
   # GET /events
@@ -80,6 +80,12 @@ class EventsController < ApplicationController
       redirect_to events_url, notice: t('events.reject')
     end
 
+  end
+
+  def show_recommendations
+    participants = @event.users.clone
+    participants << current_user
+    @recommendations = Event.calculate_reommendations('Dessert', participants)
   end
 
   private
