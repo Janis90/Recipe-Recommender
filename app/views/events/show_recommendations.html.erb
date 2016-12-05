@@ -5,7 +5,8 @@
     </div>
   </div>
 
-  <% @recommendations.each do |recipe, score| %>
+  <h1 class="text-center">Starters</h1>
+  <% @recommendations_starter[0].each do |recipe, score| %>
       <div class="row">
         <%= link_to recipe_path(recipe) do %>
             <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
@@ -13,10 +14,117 @@
                 <div class="panel-body">
                   <div class="media">
                     <div class="media-left media-middle">
-                      <%= image_tag("http://images.media-allrecipes.com/userphotos/250x250/1130307.jpg", :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                      <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
                     </div>
                     <div class="media-body">
-                      <h4 class="media-heading text-center"><%= recipe.name %>- <%= score %></h4>
+                      <h4 class="media-heading text-center"><%= recipe.name %> - <%= score %></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+  <h3 class="text-center">Alternatives:</h3>
+  <% @recommendations_starter[1].each do |recipe, score| %>
+      <div class="row">
+        <%= link_to recipe_path(recipe) do %>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-left media-middle">
+                      <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading text-center"><%= recipe.name %> - <%= score %></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+
+  <h1 class="text-center">Main Courses</h1>
+  <% @recommendations_main[0].each do |recipe, score| %>
+      <div class="row">
+        <%= link_to recipe_path(recipe) do %>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-left media-middle">
+                      <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading text-center"><%= recipe.name %> - <%= score %></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+  <h3 class="text-center">Alternatives:</h3>
+  <% @recommendations_main[1].each do |recipe, score| %>
+      <div class="row">
+        <%= link_to recipe_path(recipe) do %>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-left media-middle">
+                      <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading text-center"><%= recipe.name %> - <%= score %></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+
+  <h1 class="text-center">Desserts</h1>
+  <% @recommendations_dessert[0].each do |recipe, score| %>
+  <div class="row">
+    <%= link_to recipe_path(recipe) do %>
+        <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="media">
+                <div class="media-left media-middle">
+                  <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading text-center"><%= recipe.name %> - <%= score %></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <% end %>
+  <h3 class="text-center">Alternatives:</h3>
+  <% @recommendations_dessert[1].each do |recipe, score| %>
+      <div class="row">
+        <%= link_to recipe_path(recipe) do %>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-left media-middle">
+                      <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading text-center"><%= recipe.name %> - <%= score %></h4>
                     </div>
                   </div>
                 </div>

@@ -35,6 +35,8 @@ class Event < ActiveRecord::Base
     recipes = filter(menu_type, participants)
     recipe_recommendations = {}
     r = Random.new
+    max_value = 0
+    results = []
 
     recipes.each {|recipe|
       recipe.ingredients.each { |ingredient|
@@ -53,28 +55,29 @@ class Event < ActiveRecord::Base
 
     (0..2).each do |i|
       key_value = largest_hash_key(recipe_scores)
-      debugger
+      if i == 0
+        max_value = key_value[1]
+      end
       if key_value.present?
         recipe_recommendations[key_value[0]] = key_value[1]
         recipe_scores.delete(key_value[0])
       end
     end
+    results << recipe_recommendations
+    recipe_recommendations = {}
 
-
-=begin
-    possible_recommendations = recipe_scores.select{|k,v| v > 0.7}
+    possible_recommendations = recipe_scores.select{|k,v| v > max_value - 0.2}
     (0..2).each do |i|
-      index = r.rand(0..(possible_recommendations.length -1))
+      index = r.rand(1..possible_recommendations.length) -1
       key = possible_recommendations.keys[index]
-      unless key.present?
+      if key.present?
         recipe_recommendations[key] = recipe_scores[key]
         possible_recommendations.delete(key)
       end
     end
-=end
-debugger
-    recipe_recommendations
 
+    results << recipe_recommendations
+    results
   end
 
   private
@@ -161,7 +164,17 @@ debugger
 
   #returns an array [key,value]
   def self.largest_hash_key(hash)
-    hash.max_by{|k,v| v}
+    #hash.max_by{|k,v| v}
+    max = -1000.0
+    max_key = -1
+
+    hash.each do |k,v|
+      if v > max
+        max = v
+        max_key = k
+      end
+    end
+    return [max_key, max]
   end
 end
 

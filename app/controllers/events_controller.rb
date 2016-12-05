@@ -83,9 +83,12 @@ class EventsController < ApplicationController
   end
 
   def show_recommendations
-    participants = @event.users.clone
+    participants = @event.users
     participants << current_user
-    @recommendations = Event.calculate_reommendations('Dessert', participants)
+    @recommendations_starter = Event.calculate_reommendations(Recipe::MENU_TYPE[0], participants)
+    @recommendations_main = Event.calculate_reommendations(Recipe::MENU_TYPE[1], participants)
+    @recommendations_dessert = Event.calculate_reommendations(Recipe::MENU_TYPE[2], participants)
+    @event.users.destroy(current_user)
   end
 
   private
