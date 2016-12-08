@@ -48,6 +48,8 @@ gem 'bootstrap-datepicker-rails'
 # Needed for web scraping
 gem 'nokogiri', '~> 1.6.8.1'
 
+# Neo4j wrapper
+gem 'neography'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
