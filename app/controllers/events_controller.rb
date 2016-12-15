@@ -83,44 +83,46 @@ class EventsController < ApplicationController
   end
 
   def show_recommendations
-    participants = @event.users
-    participants << current_user
-    @recommendations_starter = Event.calculate_reommendations(Recipe::MENU_TYPE[0], participants)
-    @recommendations_main = Event.calculate_reommendations(Recipe::MENU_TYPE[1], participants)
-    @recommendations_dessert = Event.calculate_reommendations(Recipe::MENU_TYPE[2], participants)
-    @event.users.destroy(current_user)
+    ActiveRecord::Base.transaction do
+      participants = @event.users
+      participants << current_user
+      @recommendations_starter = Event.calculate_reommendations(Recipe::MENU_TYPE[0], participants)
+      @recommendations_main = Event.calculate_reommendations(Recipe::MENU_TYPE[1], participants)
+      @recommendations_dessert = Event.calculate_reommendations(Recipe::MENU_TYPE[2], participants)
+      @event.users.destroy(current_user)
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def set_friends
-      @friends = current_user.friends
-    end
+  def set_friends
+    @friends = current_user.friends
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:title, :description, :date, :start_time, :end_time)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:title, :description, :date, :start_time, :end_time)
+  end
 
-    def invited_friends_params
-      params[:event][:id]
-    end
+  def invited_friends_params
+    params[:event][:id]
+  end
 
-    def get_invited_friends_from_params
-      User.where(id: invited_friends_params)
-    end
+  def get_invited_friends_from_params
+    User.where(id: invited_friends_params)
+  end
 
-    #convert date to mm/dd/yyyy
-    def transform_date_type(date)
-      if date.present? &&
+  #convert date to mm/dd/yyyy
+  def transform_date_type(date)
+    if date.present? &&
         if date.present?
           new_date = date.strftime("%m/%d/%Y")
           new_date
         end
-      end
     end
+  end
 end

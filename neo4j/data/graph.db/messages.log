@@ -2053,3 +2053,51 @@ Storage files: (filename : modification date - size)
 2016-12-08 17:37:52.789+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [526]:  Check pointing completed
 2016-12-08 17:37:52.789+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
 2016-12-08 17:37:52.789+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-08 20:44:58.025+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10801927ms.
+2016-12-10 08:36:28.031+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 129059557ms.
+2016-12-10 08:36:32.727+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 266ms.
+2016-12-10 08:36:49.893+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 339ms.
+2016-12-10 08:39:54.728+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 348ms.
+2016-12-10 12:18:03.720+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 4624962ms.
+2016-12-10 12:55:06.594+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 357ms.
+2016-12-10 15:21:23.024+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 8229694ms.
+2016-12-10 18:46:05.038+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10801007ms.
+2016-12-11 06:31:04.860+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 42276330ms.
+2016-12-11 06:40:24.285+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 203ms.
+2016-12-11 06:41:02.990+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [530]:  Starting check pointing...
+2016-12-11 06:41:02.991+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [530]:  Starting store flush...
+2016-12-11 06:41:02.999+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 530 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-11 06:41:03.014+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 530 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-11 06:41:03.020+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [530]:  Store flush completed
+2016-12-11 06:41:03.021+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [530]:  Starting appending check point entry into the tx log...
+2016-12-11 06:41:03.022+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [530]:  Appending check point entry into the tx log completed
+2016-12-11 06:41:03.022+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [530]:  Check pointing completed
+2016-12-11 06:41:03.022+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-11 06:41:03.022+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-11 06:46:03.143+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [534]:  Starting check pointing...
+2016-12-11 06:46:03.144+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [534]:  Starting store flush...
+2016-12-11 06:46:03.146+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 534 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-11 06:46:03.156+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 534 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-11 06:46:03.166+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [534]:  Store flush completed
+2016-12-11 06:46:03.167+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [534]:  Starting appending check point entry into the tx log...
+2016-12-11 06:46:03.168+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [534]:  Appending check point entry into the tx log completed
+2016-12-11 06:46:03.168+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [534]:  Check pointing completed
+2016-12-11 06:46:03.168+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-11 06:46:03.169+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-11 09:27:20.023+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 6992220ms.
+2016-12-11 09:50:16.033+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 1793ms.
+2016-12-11 12:55:21.027+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10800872ms.
+2016-12-11 15:31:53.880+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 9370252ms.
+2016-12-13 08:09:13.227+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 146225464ms.
+2016-12-13 08:09:15.472+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 1574ms.
+2016-12-13 08:09:52.204+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 467ms.
+2016-12-13 08:12:13.556+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 465ms.
+2016-12-13 12:58:09.030+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10801265ms.
+2016-12-15 11:05:40.904+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 166020950ms.
+2016-12-15 11:06:00.880+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 541ms.
+2016-12-15 11:09:45.345+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 357ms.
+2016-12-15 11:28:56.028+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 567620ms.
+2016-12-15 14:53:16.023+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10800752ms.
+2016-12-15 15:21:42.982+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 1675767ms.
+2016-12-15 15:21:59.210+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 685ms.
+2016-12-15 15:22:46.107+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 285ms.
