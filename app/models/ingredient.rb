@@ -10,6 +10,8 @@ class Ingredient < ActiveRecord::Base
   after_create :set_new_user_ingredients
   after_update :set_user_ingredients
 
+  default_scope { order(name: :asc) }
+
   def set_user_ingredients
     if self.is_foodcategory_changed?
       if self.is_foodcategory_was

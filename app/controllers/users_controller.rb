@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   #categories are ingredients that allow a good clustering
   #food categories are e.g. 'Potatoes', 'Rice' and 'Fish'
   def set_category_ingredients
-    @ingredients = Ingredient.where(is_foodcategory: true)
+    @ingredients = Ingredient.where(is_foodcategory: true).order('name desc')
   end
 
   #def get_category_ingredients_from_params

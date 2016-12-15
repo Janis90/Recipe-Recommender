@@ -2101,3 +2101,76 @@ Storage files: (filename : modification date - size)
 2016-12-15 15:21:42.982+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 1675767ms.
 2016-12-15 15:21:59.210+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 685ms.
 2016-12-15 15:22:46.107+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 285ms.
+2016-12-15 16:01:02.101+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [535]:  Starting check pointing...
+2016-12-15 16:01:02.102+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [535]:  Starting store flush...
+2016-12-15 16:01:02.105+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 535 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 16:01:02.120+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 535 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 16:01:02.130+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [535]:  Store flush completed
+2016-12-15 16:01:02.130+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [535]:  Starting appending check point entry into the tx log...
+2016-12-15 16:01:02.132+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [535]:  Appending check point entry into the tx log completed
+2016-12-15 16:01:02.132+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [535]:  Check pointing completed
+2016-12-15 16:01:02.134+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 16:01:02.134+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 16:17:42.314+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [536]:  Starting check pointing...
+2016-12-15 16:17:42.318+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [536]:  Starting store flush...
+2016-12-15 16:17:42.319+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 536 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-15 16:17:42.325+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 536 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-15 16:17:42.334+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [536]:  Store flush completed
+2016-12-15 16:17:42.334+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [536]:  Starting appending check point entry into the tx log...
+2016-12-15 16:17:42.334+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [536]:  Appending check point entry into the tx log completed
+2016-12-15 16:17:42.334+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [536]:  Check pointing completed
+2016-12-15 16:17:42.335+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 16:17:42.335+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 16:22:42.409+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [537]:  Starting check pointing...
+2016-12-15 16:22:42.410+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [537]:  Starting store flush...
+2016-12-15 16:22:42.411+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 537 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 16:22:42.425+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 537 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 16:22:42.430+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [537]:  Store flush completed
+2016-12-15 16:22:42.430+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [537]:  Starting appending check point entry into the tx log...
+2016-12-15 16:22:42.431+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [537]:  Appending check point entry into the tx log completed
+2016-12-15 16:22:42.431+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [537]:  Check pointing completed
+2016-12-15 16:22:42.432+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 16:22:42.432+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 16:23:42.101+0000 INFO  [o.n.c.i.ServerExecutionEngine] Discarded stale query from the query cache: CYPHER 2.3 MATCH (n)
+RETURN n;
+2016-12-15 16:23:42.103+0000 INFO  [o.n.c.i.CypherCompiler] Discarded stale query from the query cache: Query(None,SingleQuery(List(Match(false,Pattern(List(EveryPath(NodePattern(Some(Identifier(n)),List(),None,false)))),List(),None), Return(false,ReturnItems(false,List(AliasedReturnItem(Identifier(n),Identifier(n)))),None,None,None))))
+2016-12-15 16:27:42.492+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [772]:  Starting check pointing...
+2016-12-15 16:27:42.492+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [772]:  Starting store flush...
+2016-12-15 16:27:42.539+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 772 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-15 16:27:42.543+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 772 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-15 16:27:42.545+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [772]:  Store flush completed
+2016-12-15 16:27:42.545+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [772]:  Starting appending check point entry into the tx log...
+2016-12-15 16:27:42.545+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [772]:  Appending check point entry into the tx log completed
+2016-12-15 16:27:42.546+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [772]:  Check pointing completed
+2016-12-15 16:27:42.546+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 16:27:42.546+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 16:43:02.722+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [773]:  Starting check pointing...
+2016-12-15 16:43:02.722+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [773]:  Starting store flush...
+2016-12-15 16:43:02.723+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 773 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 16:43:02.736+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 773 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 16:43:02.738+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [773]:  Store flush completed
+2016-12-15 16:43:02.738+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [773]:  Starting appending check point entry into the tx log...
+2016-12-15 16:43:02.739+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [773]:  Appending check point entry into the tx log completed
+2016-12-15 16:43:02.739+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [773]:  Check pointing completed
+2016-12-15 16:43:02.739+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 16:43:02.739+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 16:48:02.801+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1005]:  Starting check pointing...
+2016-12-15 16:48:02.801+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1005]:  Starting store flush...
+2016-12-15 16:48:02.811+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 1005 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-15 16:48:02.818+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 1005 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b].
+2016-12-15 16:48:02.822+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1005]:  Store flush completed
+2016-12-15 16:48:02.822+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1005]:  Starting appending check point entry into the tx log...
+2016-12-15 16:48:02.823+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1005]:  Appending check point entry into the tx log completed
+2016-12-15 16:48:02.823+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1005]:  Check pointing completed
+2016-12-15 16:48:02.824+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 16:48:02.824+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 17:31:43.416+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Starting check pointing...
+2016-12-15 17:31:43.439+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Starting store flush...
+2016-12-15 17:31:43.441+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 1006 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 17:31:43.447+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 1006 to [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.b], from [/Users/janislandwehr/workspace/recipe_recommender/Recipe-Recommender/neo4j/data/graph.db/neostore.counts.db.a].
+2016-12-15 17:31:43.452+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Store flush completed
+2016-12-15 17:31:43.453+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Starting appending check point entry into the tx log...
+2016-12-15 17:31:43.453+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Appending check point entry into the tx log completed
+2016-12-15 17:31:43.453+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Check pointing completed
+2016-12-15 17:31:43.454+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-12-15 17:31:43.454+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.

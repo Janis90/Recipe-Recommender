@@ -33,6 +33,23 @@ class RecipesController < ApplicationController
     @recipe.allergies = get_allergies_from_params
     @recipe.ingredients = get_selected_ingredients
 
+    #Shows an example on how to automatically check whether a recipe is suitable for a person with an intolerance
+    laktoseintoleranz = Allergy.where(name: 'Laktoseintoleranz').first
+    unless @recipe.allergies.include?(laktoseintoleranz)
+      neo = Neography::Rest.new({:username => "user", :password => "user"})
+      includes_laktose_ingredient = false
+
+      @recipe.ingredients.each do |ingredient|
+        node = neo.execute_query("MATCH (n)-[]->(i) WHERE n.name = 'Laktoseintoleranz' AND i.name = '#{ingredient.name}' RETURN i")
+        if node["data"].present?
+          includes_laktose_ingredient = true
+        end
+      end
+      unless includes_laktose_ingredient
+        @recipe.allergies << laktoseintoleranz
+      end
+    end
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
@@ -107,11 +124,11 @@ class RecipesController < ApplicationController
     end
 
     def set_allergies
-      @allergies = Allergy.all
+      @allergies = Allergy.all.order('name ASC')
     end
 
     def set_ingredients
-      @ingredients = Ingredient.all
+      @ingredients = Ingredient.all.order('name ASC')
     end
 
     def get_selected_ingredients
