@@ -84,7 +84,6 @@ class Event < ActiveRecord::Base
     end
 
     results << recipe_recommendations
-    debugger
     results
   end
 
@@ -147,8 +146,8 @@ class Event < ActiveRecord::Base
         when 1
           score -= 1000 * number_of_participants
         when 2
-          # equals out 1 (+5points) ingredient that everybody loves
-          score -= 30 * (number_of_participants - 1)
+          # almost equals out 1 ingredient that everybody loves
+          score -= 20 * (number_of_participants )
         when 3
           # 3 does not have any effect on the outcome
         else

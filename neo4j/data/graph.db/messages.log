@@ -2174,3 +2174,15 @@ RETURN n;
 2016-12-15 17:31:43.453+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [1006]:  Check pointing completed
 2016-12-15 17:31:43.454+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
 2016-12-15 17:31:43.454+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-12-15 22:45:50.705+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 205ms.
+2016-12-16 01:46:14.016+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10800929ms.
+2016-12-16 06:51:21.264+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 18275363ms.
+2016-12-16 06:51:43.537+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 292ms.
+2016-12-16 09:56:00.020+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10772211ms.
+2016-12-16 09:56:00.744+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 623ms.
+2016-12-16 09:56:02.410+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 550ms.
+2016-12-16 13:20:35.017+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10800668ms.
+2016-12-16 17:20:57.038+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 14390670ms.
+2016-12-16 17:21:17.022+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 374ms.
+2016-12-16 20:32:58.020+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 10801659ms.
+2016-12-17 07:00:58.519+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 37656866ms.

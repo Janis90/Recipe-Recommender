@@ -27,5 +27,9 @@ Setting up this project:
 	2. Uncomment __secret_key_base__ and insert the generated key
 4. Add the secret key to config/initializers/devise (config.secret_key = Secret_key) 
 	The secret key might differ from the one above. But there will be a key shown in the terminal
-5. Run the application with __rails server__
-	The application can on default be found at port 3000
+5. Install Neo4j database with __rake neo4j:install__. Note: neo4j might cause problems with java 8 -> version 7 might needs to be flagged
+    1. Start Neo4j server __rake neo4j:start__ 
+    2. Not sure if needed: Create a new user (name: user, pw: user) at http://localhost:7474
+6. Fill the database with __rake db:seed__
+5. Run the application with __rails server__.
+	Rails default port is 3000.
