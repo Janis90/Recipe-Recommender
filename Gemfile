@@ -51,6 +51,8 @@ gem 'nokogiri', '~> 1.6.8.1'
 # Neo4j wrapper
 gem 'neography'
 
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -62,6 +64,7 @@ group :development, :test do
   gem 'ffaker'
   #Reset database
   gem 'pgreset', '~> 0.1.1'
+  gem "rails-erd"
 end
 
 group :development do
