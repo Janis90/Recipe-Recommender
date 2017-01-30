@@ -57,7 +57,6 @@ class Event < ActiveRecord::Base
       key_value = largest_hash_key(recipe_scores)
       #Recipe with largest key does not exist
       if key_value[0] == -1
-        debugger
         return results
       end
       if i == 0
@@ -101,10 +100,11 @@ class Event < ActiveRecord::Base
         allergies << allergy unless allergies.include?(allergy)
       }
     }
-
-    #Allergies-Recipies: Recipe can be consumed with following allergy
-    usable_recipes = []
-    unless allergies.empty?
+    if allergies.empty?
+      return recipes
+    else
+      #Allergies-Recipies: Recipe can be consumed with following allergy
+      usable_recipes = []
       recipes.each { |recipe|
         usable = true
         allergies.each { |allergy|

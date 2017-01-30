@@ -64,3 +64,12 @@
 2016-12-08 18:12:55.885+0100 INFO  Mounting static content at /webadmin
 2016-12-08 18:12:55.958+0100 INFO  Mounting static content at /browser
 2016-12-08 18:12:58.515+0100 INFO  Remote interface ready and available at http://localhost:7474/
+16:42:10.046 [main] DEBUG i.n.u.i.l.InternalLoggerFactory - Using SLF4J as the default logging framework
+2017-01-22 16:42:17.454+0100 INFO  Successfully started database
+2017-01-22 16:42:17.508+0100 INFO  Starting HTTP on port 7474 (4 threads available)
+2017-01-22 16:42:17.797+0100 INFO  Enabling HTTPS on port 7473
+2017-01-22 16:42:17.902+0100 INFO  Mounting static content at /webadmin
+2017-01-22 16:42:17.964+0100 INFO  Mounting static content at /browser
+2017-01-22 16:42:20.791+0100 INFO  Remote interface ready and available at http://localhost:7474/
+2017-01-23 16:37:30.342+0100 INFO  Neo4j Server shutdown initiated by request
+2017-01-23 16:37:30.487+0100 INFO  Successfully shutdown Neo4j Server
