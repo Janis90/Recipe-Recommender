@@ -19,7 +19,7 @@ end
 #Create dependencies in graph database
 neo = Neography::Rest.new({:username => "user", :password => "user"})
 ingredientDependency = IngredientDependency.new(neo)
-ingredientDependency.setup_db
+#ingredientDependency.setup_db
 
 crawler = WebCrawler.new('http://www.lecker-ohne.de/alle-rezepte?ka=1&titel=&field_rezeptzutaten_value=&items_per_page=40', Recipe::MENU_TYPE[0])
 crawler.crawl

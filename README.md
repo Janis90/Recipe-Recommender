@@ -20,16 +20,18 @@ Setting up this project:
 
 2. Move config/database.yml.example -> config/database.yml
 	1. Insert a postgres username
-	2. Insert names for the databeses e.g. recipe_recommender_development
-	3. Run __rake db:create__ to create the database
+	2. Insert names for the databeses e.g. recipe_recommender_development under development
+	3. Run __rake db:create__ to create the database (might need to add bundle exec)
 3. Move config/secrets.yml.example -> config/secrets.yml
 	1. Create a __secret_key_base__ with __bundle exec rake secret__
-	2. Uncomment __secret_key_base__ and insert the generated key
-4. Add the secret key to config/initializers/devise (config.secret_key = Secret_key) 
+	2. Uncomment __secret_key_base__ and insert the generated key (secret_key_base: 'key')
+4. Add the secret key to config/initializers/devise (config.secret_key = 'key') 
 	The secret key might differ from the one above. But there will be a key shown in the terminal
-5. Install Neo4j database with __rake neo4j:install__. Note: neo4j might cause problems with java 8 -> version 7 might needs to be flagged
+5. Install Neo4j database with __rake neo4j:install__. Note: neo4j might cause problems with java 8 (worked for me)
     1. Start Neo4j server __rake neo4j:start__ 
-    2. Not sure if needed: Create a new user (name: user, pw: user) at http://localhost:7474
-6. Fill the database with __rake db:seed__
+    2. (Not needed because I didn't exclude the neo4j database on github: Create a new user (name: user, pw: user) at http://localhost:7474)
+6. Fill the database with __rake db:setup__
 5. Run the application with __rails server__.
-	Rails default port is 3000.
+	Rails' default port is 3000.
+#####NOTE: The neo4j is already filled. Therefore, '#ingredientDependency.setup_db' in config/db/seeds.rb is commented out. If you want do renew the neo4j database, please undo the comment.
+#####In case that you run in any problems while using rake try 'bundle exec rake'

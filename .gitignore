@@ -49,3 +49,5 @@ bower.json
 
 #Ignore ide-settings
 /.idea/
+
+.DS_Store
