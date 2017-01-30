@@ -2959,3 +2959,4 @@ Storage files: (filename : modification date - size)
 2017-01-30 20:34:21.476+0000 INFO  [o.n.k.i.DiagnosticsManager] --- SERVER STARTED START ---
 2017-01-30 20:34:22.726+0000 INFO  [o.n.k.i.DiagnosticsManager] --- SERVER STARTED END ---
 2017-01-30 21:59:08.022+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 1381ms.
+2017-01-30 22:31:28.019+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 1302ms.
