@@ -65,6 +65,7 @@ group :development, :test do
   #Reset database
   gem 'pgreset', '~> 0.1.1'
   gem "rails-erd"
+  gem 'railroady'
 end
 
 group :development do

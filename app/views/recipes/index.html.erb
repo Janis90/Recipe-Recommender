@@ -15,7 +15,7 @@
                 <div class="panel-body">
                   <div class="media">
                     <div class="media-left media-middle">
-                      <%= image_tag("http://images.media-allrecipes.com/userphotos/250x250/1130307.jpg", :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
+                      <%= image_tag(recipe.picture_url, :alt => "recipes", class: "media-object img-rounded", width: "80", height: "60") %>
                     </div>
                     <div class="media-body">
                       <h4 class="media-heading text-center"><%= recipe.name %></h4>
